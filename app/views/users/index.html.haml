@@ -1,3 +1,6 @@
+%h3.text-center
+  Users
+  = User.count 
 .card-columns
   - @users.each do |user|
     = render 'users/user', user: user
