@@ -23,6 +23,10 @@
             = link_to new_course_path, class: 'nav-link' do
               .fa.fa-plus
               New Course
+          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(pages_activity_path)}"}
+            = link_to pages_activity_path, class: 'nav-link' do
+              .fa.fa-bell
+              Activity
         .d-flex.align-items-center
           -#  Search with ransack
           = search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f|
@@ -38,10 +42,7 @@
           -#     %span.input-group-append
           -#       %button.btn.btn-primary.btn-sm{:type => "submit"}
           -#         %span.fa.fa-search{"aria-hidden" => "true"}
-          -# %li.nav-item{class: "#{'active font-weight-bold' if current_page?(home_activity_path)}"}
-          -#   = link_to home_activity_path, class: 'nav-link' do
-          -#     .fa.fa-bell
-          -#     Activity
+
           %li.nav-item.dropdown
             %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
               %b= current_user.email

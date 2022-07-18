@@ -21,7 +21,7 @@ gem 'faker'
 gem 'devise'
 gem 'friendly_id', '~> 5.4.0'
 gem 'ransack'
-
+gem 'public_activity'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
