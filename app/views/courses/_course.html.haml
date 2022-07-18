@@ -20,7 +20,7 @@
     = course.created_at.strftime('%d-%b-%Y')
     %br
     .fa-solid.fa-chalkboard-user
-    = course.user
+    = course.user.user_name
   .card-footer 
     = link_to 'Show', course
     \|

@@ -78,3 +78,7 @@
  .form-control.is-valid {
   background-image: none;
  }
+ 
+ .card-title{
+  padding: 0.5rem 1rem 0;
+ }
