@@ -1,6 +1,70 @@
-%h1 Pages#index
-%p Find me in app/views/pages/index.html.erb
-%i.fa-solid.fa-binoculars
-= link_to courses_path, class: 'btn btn-success' do 
-  .fa.fa-book 
-    Course
+.jumbotron
+  .banner-text-container 
+    %h2 Learning that gets you
+    %p Skills for your present (and your future). Get started with us.
+  %p
+  .my-2.my-lg-0
+  -if current_user
+    -# = search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f|
+    -#   .input-group
+    -#     = f.search_field :title_cont, class: 'form-control-sm', style: 'float: left; width: 150px; ', placeholder: 'Find a course', :autocomplete => :off
+    -#     %span.input-group-append
+    -#       %button.btn.btn-primary.btn-sm{:type => "submit"}
+    -#         %span.fa.fa-search{"aria-hidden" => "true"}
+  -# .form-inline.my-2.my-lg-0
+  -#   = form_tag(courses_path, method: :get) do
+  -#     .input-group
+  -#       = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Search", class: 'form-control-sm'
+  -#       %span.input-group-append
+  -#         %button.btn.btn-primary.btn-sm{:type => "submit"}
+  -#           %span.fa.fa-search{"aria-hidden" => "true"}
+%h2.mb-4
+  Let's start learning 
+  = current_user
+.card-group
+  .card.card-body
+    %h1
+      .fa.fa-graduation-cap
+    = Course.count
+    online courses
+    .row
+    Explore a variety of fresh topics
+  .card.card-body
+    %h1
+      .fa.fa-chalkboard-teacher
+      /.fa.fa-brain
+    = Course.distinct.count(:user_id)
+    expert instructors
+    .row
+    Find the right instructor for you
+  .card.card-body
+    %h1
+      .fa.fa-user-graduate
+    = User.count
+    active learners
+    .row
+    Join the knowledge sharing community
+  .card.card-body
+    %h1
+      .fa.fa-infinity
+    Lifetime access
+    .row
+    Learn on your schedule
+  
+%hr
+  %h2 Popular courses
+.row.row-cols-1.row-cols-md-3
+  -@popular_courses.each do |course|
+    =render 'courses/course', course: course
+
+%hr
+  %h2 Most recent courses
+.row.row-cols-1.row-cols-md-3
+  -@recent_courses.each do |course|
+    =render 'courses/course', course: course
+
+%hr
+  %h2 Top rated courses
+.row.row-cols-1.row-cols-md-3
+  -@top_rated_courses.each do |course|
+    =render 'courses/course', course: course

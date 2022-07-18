@@ -1,6 +1,6 @@
 %nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
   .container
-    %a.navbar-brand{:href => '/'} Coursego
+    %a.navbar-brand{:href => '/'} SKillUP
     %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
       %span.navbar-toggler-icon
     #navbarSupportedContent.collapse.navbar-collapse.justify-content-between
@@ -32,12 +32,12 @@
           -#       %button.btn.btn-primary.btn-sm{:type => "submit"}
           -#         %span.fa.fa-search{"aria-hidden" => "true"}
           -# for refence, general search
-            -# = form_tag(courses_path, method: :get) do
-            -#   .input-group
-            -#     = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Search", class: 'form-control-sm'
-            -#     %span.input-group-append
-            -#       %button.btn.btn-primary.btn-sm{:type => "submit"}
-            -#         %span.fa.fa-search{"aria-hidden" => "true"}
+          = form_tag(courses_path, method: :get) do
+            .input-group
+              = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Search", class: 'form-control-sm'
+              %span.input-group-append
+                %button.btn.btn-primary.btn-sm{:type => "submit"}
+                  %span.fa.fa-search{"aria-hidden" => "true"}
           -# %li.nav-item{class: "#{'active font-weight-bold' if current_page?(home_activity_path)}"}
           -#   = link_to home_activity_path, class: 'nav-link' do
           -#     .fa.fa-bell
@@ -52,6 +52,11 @@
               = link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do
                 .fa.fa-sign-out-alt
                 %b Sign out
+            %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_course_path)}"}
+              = button_to destroy_user_session_path, method: :delete, class: 'nav-link' do
+                .fa.fa-sign-out-alt
+                Sign out
+
       - else
         %ul.navbar-nav
           %li.nav-item= link_to 'Sign Up', new_user_registration_path, class: 'nav-link'

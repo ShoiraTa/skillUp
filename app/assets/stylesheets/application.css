@@ -21,10 +21,53 @@
   box-sizing: border-box;
  }
 
- a{
-  letter-spacing: 1px;
- }
-
  li{
   list-style: none;
+ }
+
+ .card-column {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+ }
+
+ h5{
+  font-weight: 400;
+ }
+ a{
+  text-decoration: none;
+ }
+
+ input{
+  border: 1px solid;
+ }
+
+ button{
+  background: transparent;
+  border:  none;
+ }
+
+ .jumbotron {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-image: url('db24b94e-d190-4d5a-b1dd-958f702cc8f5.jpg');
+  padding: 1rem;
+  margin-bottom: 2rem;
+  margin-left: -40px;
+  width: 94vw;
+ }
+
+ .banner-text-container {
+  height: auto;
+  padding: 1rem;
+  background-color: #fff;
+  width: 400px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  margin-left: 4rem
+ }
+
+ .form-control{
+  margin-bottom: 1rem;
  }
