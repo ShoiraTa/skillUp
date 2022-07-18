@@ -12,4 +12,19 @@
  *
  *= require_tree .
  *= require_self
+ //= require trix
  */
+
+
+ body{
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+ }
+
+ a{
+  letter-spacing: 1px;
+ }
+
+ li{
+  list-style: none;
+ }

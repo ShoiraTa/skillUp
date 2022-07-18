@@ -5,3 +5,14 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+# User.create!(email: 'admin2@example.com', password: '1234567', password_confirmation: '1234567')
+10.times do
+Course.create!([{
+  title: Faker::Educator.course_name,
+  description: Faker::TvShows::GameOfThrones.quote,
+  user_id: User.last.id
+  }]
+
+)
+end
