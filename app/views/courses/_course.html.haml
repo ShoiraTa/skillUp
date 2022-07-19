@@ -23,7 +23,9 @@
     = course.user.user_name
   .card-footer 
     = link_to 'Show', course
-    \|
-    = link_to 'Edit', edit_course_path(course)
-    \|
-    = link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }
+
+    - if policy(course).edit? 
+      \|
+      = link_to 'Edit', edit_course_path(course) 
+      \| 
+      = link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }

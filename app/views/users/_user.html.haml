@@ -9,7 +9,8 @@
   .card-footer
     - user.roles.each do |role|
       = role.name
-    = link_to 'Edit roles', edit_user_path(user), class: 'btn '
+    - if policy(user).edit? 
+      = link_to 'Edit roles', edit_user_path(user), class: 'btn '
   .card-footer
     = 'sign_in_count'.humanize
     .row
