@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update]
+  before_action :set_user, only: [:edit, :update, :show]
   def index
     # @users = User.all.order(created_at: :desc)
     @q = User.ransack(params[:q])
@@ -7,6 +7,8 @@ class UsersController < ApplicationController
   end
 
   def edit
+  end
+  def show
   end
   def update
     authorize @user
@@ -21,7 +23,7 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
   end
   def user_params
     params.require(:user).permit({role_ids: []})
