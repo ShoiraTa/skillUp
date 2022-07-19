@@ -7,8 +7,11 @@
     = time_ago_in_words(user.created_at)
     ago
   .card-footer
+    - user.roles.each do |role|
+      = role.name
+    = link_to 'Edit roles', edit_user_path(user), class: 'btn '
+  .card-footer
     = 'sign_in_count'.humanize
-    = user.sign_in_count
     .row
     -# = 'current_sign_in_at'.humanize
     -# = user.current_sign_in_at
