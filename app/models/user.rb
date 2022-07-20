@@ -27,6 +27,11 @@ class User < ApplicationRecord
     end
   end
 
+  # check if online? 
+  def online? 
+    updated_at > 2.minutes.ago
+  end
+
   # Friendly id
   extend FriendlyId
   friendly_id :email, use: :slugged
