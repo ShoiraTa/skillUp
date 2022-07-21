@@ -4,7 +4,6 @@ class CoursePolicy < ApplicationPolicy
       scope.all
     end
   end
-  if  @user 
     def edit? 
       @record.user == @user || @user.has_role?(:admin)
     end
@@ -21,6 +20,5 @@ class CoursePolicy < ApplicationPolicy
       @record.user == @user || @user.has_role?(:admin)
     end
 
-  end
 
 end

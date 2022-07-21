@@ -1,0 +1,15 @@
+.card
+  .card-header
+    = link_to lesson.title, course_lesson_path(lesson.course,  lesson)
+  .card-body
+    %h5 
+      Course:    
+      = lesson.course
+    = lesson.content
+  .card-footer
+    .row
+      .col-6
+        = link_to 'Edit', edit_course_lesson_path(lesson.course,  lesson ), class: 'btn btn-sm btn-warning'
+      .col-6
+        = button_to 'Destroy',  [lesson.course, lesson], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
+%p

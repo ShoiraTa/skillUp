@@ -50,21 +50,21 @@
     Lifetime access
     .row
     Learn on your schedule
-  
+
 %hr
   %h2 Popular courses
 .row.row-cols-1.row-cols-md-3
   -@popular_courses.each do |course|
     =render 'courses/course', course: course
 
-%hr
-  %h2 Most recent courses
-.row.row-cols-1.row-cols-md-3
-  -@recent_courses.each do |course|
-    =render 'courses/course', course: course
+    -# %hr
+    -#   %h2 Most recent courses
+    -# .row.row-cols-1.row-cols-md-3
+    -#   -@recent_courses.each do |course|
+    -#     =render 'courses/course', course: course
 
-%hr
-  %h2 Top rated courses
-.row.row-cols-1.row-cols-md-3
-  -@top_rated_courses.each do |course|
-    =render 'courses/course', course: course
+    -# %hr
+    -#   %h2 Top rated courses
+    -# .row.row-cols-1.row-cols-md-3
+    -#   -@top_rated_courses.each do |course|
+    -#     =render 'courses/course', course: course
