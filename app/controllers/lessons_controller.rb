@@ -8,31 +8,31 @@ class LessonsController < ApplicationController
 
   # GET /lessons/1 or /lessons/1.json
   def show
-    # authorize @lesson
+    authorize @lesson
   end
 
   # GET /lessons/new
   def new
-    @course = Course.friendly.find(params[:course_id])
     @lesson = Lesson.new
+    @course = Course.friendly.find(params[:course_id])
     # authorize @lesson
   end
 
   # GET /lessons/1/edit
   def edit
-    @course = Course.friendly.find(params[:course_id])
     @lesson = Lesson.friendly.find(params[:id])
-    # authorize @lesson
+    authorize @lesson
   end
 
   # POST /lessons or /lessons.json
   def create
     @lesson = Lesson.new(lesson_params)
     @course = Course.friendly.find(params[:course_id])
-    # authorize @lesson
+    @lesson.course_id = @course.id
+    authorize @lesson
     respond_to do |format|
       if @lesson.save
-        format.html { redirect_to course_lesson_url(@lesson, @course ), notice: "Lesson was successfully created." }
+        format.html { redirect_to course_lesson_url( @course, @lesson ), notice: "Lesson was successfully created." }
         format.json { render :show, status: :created, location: @lesson }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -43,10 +43,10 @@ class LessonsController < ApplicationController
 
   # PATCH/PUT /lessons/1 or /lessons/1.json
   def update
-    # authorize @lesson
+    authorize @lesson
     respond_to do |format|
       if @lesson.update(lesson_params)
-        format.html { redirect_to course_lesson_url(@lesson.course,@lesson), notice: "Lesson was successfully updated." }
+        format.html { redirect_to course_lesson_path(@course, @lesson), notice: "Lesson was successfully updated." }
         format.json { render :show, status: :ok, location: @lesson }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -58,9 +58,9 @@ class LessonsController < ApplicationController
   # DELETE /lessons/1 or /lessons/1.json
   def destroy
     @lesson.destroy
-    # authorize @lesson
+    authorize @lesson
     respond_to do |format|
-      format.html { redirect_to course_lessons_url(@lesson.course, @lesson), notice: "Lesson was successfully destroyed." }
+      format.html { redirect_to course_lesson_path(@course, @lesson), notice: "Lesson was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -68,6 +68,7 @@ class LessonsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_lesson
+      @course = Course.friendly.find(params[:course_id])
       @lesson = Lesson.friendly.find(params[:id])
     end
 
