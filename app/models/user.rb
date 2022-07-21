@@ -1,12 +1,16 @@
 class User < ApplicationRecord
+  extend FriendlyId
+
   rolify
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
   has_many :courses, dependent: :destroy
   has_many :enrollments, dependent: :destroy
-  
+  validate :must_have_a_role, on: :update
+
+  after_create :assign_default_role
+  friendly_id :email, use: :slugged
+
   def to_s
     email
   end
@@ -14,9 +18,6 @@ class User < ApplicationRecord
   def user_name
       self.email.split(/@/).first
   end
-
-  # Rolify assign role after user created
-  after_create :assign_default_role
 
   def assign_default_role
     if User.count == 1
@@ -29,16 +30,14 @@ class User < ApplicationRecord
     end
   end
 
-  # check if online? 
   def online? 
     updated_at > 2.minutes.ago
   end
 
-  # Friendly id
-  extend FriendlyId
-  friendly_id :email, use: :slugged
+  def buy_course(course)
+    self.enrollments.create(course: course, price: course.price)
+  end
 
-  validate :must_have_a_role, on: :update
   private
   def must_have_a_role
     unless roles.any? 
