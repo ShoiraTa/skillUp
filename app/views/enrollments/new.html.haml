@@ -1,0 +1,16 @@
+- content_for :title do
+  Skillup
+  |
+  New enrollment
+  =  @enrollment
+
+%p
+.card 
+  .card-header
+    %h1 New enrollment
+  .card-body
+    = render 'form'
+  .card-footer
+    = link_to 'Show', @enrollment
+    \|
+    = link_to 'Back', enrollments_path

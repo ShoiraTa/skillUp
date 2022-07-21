@@ -2,10 +2,11 @@
   Skillup
   |
   All users
-
+%br
 %h3.text-center
   Users
   = User.count 
+  
 -# .card-columns
 -#   - @users.each do |user|
 -#     = render 'users/user', user: user
@@ -15,39 +16,40 @@
   = search_form_for @q do |f|
     = f.search_field :email_cont, placeholder: 'email'
     = f.submit
-  .ml-2
-  = link_to 'refresh', users_path
+    = link_to 'refresh', users_path
+%br
 
-%table.table.table-bordered
-  %thead
-    %tr
-      %th id
-      %th= sort_link(@q, :email)
-      %th created_at
-      %th= 'sign_in_count'.humanize
-      %th= 'current_sign_in_at'.humanize
-      %th= 'last_sign_in_at'.humanize
-      %th= 'Roles'
-      %th= 'Actions'
-  %tbody
-    - @users.each do |user|
+.table-responsive
+  %table.table.table-bordered.table-striped.table-sm
+    %thead
       %tr
-        %td= user.id
-        %td  
-          - if user.online? 
-            .text-success.far.fa-circle
-          - else
-            .text-danger.far.fa-circle
-          = link_to user.email, user_path(user)
-          = link_to user.email, user_path(user)
-        %td= user.created_at
-        %td= user.sign_in_count
-        %td= user.current_sign_in_at
-        %td= user.last_sign_in_at
-        %td
-          - user.roles.each do |role|
-            = role.name
-        %td
-          - if policy(user).edit? 
-            = link_to 'Edit roles', edit_user_path(user), class: 'btn'
+        %th id
+        %th= sort_link(@q, :email)
+        %th created_at
+        %th= 'sign_in_count'.humanize
+        %th= 'current_sign_in_at'.humanize
+        %th= 'last_sign_in_at'.humanize
+        %th= 'Roles'
+        %th= 'Actions'
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= user.id
+          %td  
+            - if user.online? 
+              .text-success.far.fa-circle
+            - else
+              .text-danger.far.fa-circle
+            = link_to user.email, user_path(user)
+            = link_to user.email, user_path(user)
+          %td= user.created_at
+          %td= user.sign_in_count
+          %td= user.current_sign_in_at
+          %td= user.last_sign_in_at
+          %td
+            - user.roles.each do |role|
+              = role.name
+          %td
+            - if policy(user).edit? 
+              = link_to 'Edit roles', edit_user_path(user), class: 'btn'
 
