@@ -25,4 +25,6 @@
     .card-column
       - @courses.each do |course|
         = render 'courses/course', course:course 
-
+    .row.mt-3
+      != pagy_bootstrap_nav(@pagy)
+      != pagy_bootstrap_nav_js(@pagy)

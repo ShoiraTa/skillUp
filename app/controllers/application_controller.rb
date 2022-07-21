@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   include PublicActivity::StoreController 
   include Pundit::Authorization 
-
+  include Pagy::Backend
+  
   before_action :authenticate_user!
   before_action :set_global_variables, if: :user_signed_in?
   after_action :user_activity

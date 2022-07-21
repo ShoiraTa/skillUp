@@ -7,10 +7,12 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 # User.create!(email: 'admin2@example.com', password: '1234567', password_confirmation: '1234567')
+PublicActivity.enabled = false
 10.times do
 Course.create!([{
   title: Faker::Educator.course_name,
   description: Faker::TvShows::GameOfThrones.quote,
+  short_description: Faker::TvShows::GameOfThrones.quote,
   user_id: User.last.id,
   language: "English",
   level: "Advanced",
