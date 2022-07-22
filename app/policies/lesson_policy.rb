@@ -9,8 +9,7 @@ class LessonPolicy < ApplicationPolicy
     @record.course.user == @user 
   end
   def show? 
-    @record.course.user == @user 
-    @user.has_role?(:admin)
+    @record.course.user == @user || @user.has_role?(:admin) || @record.course.bought_course(@user) == false
   end
   def update?
     @record.course.user == @user
@@ -19,9 +18,7 @@ class LessonPolicy < ApplicationPolicy
   #   @record.course.user == @user
   # end
   def create?
-    puts ',,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,'
     @record.course
-    puts ',,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,'
     @record.course.user == @user
   end
 

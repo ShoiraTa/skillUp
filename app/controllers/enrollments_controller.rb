@@ -4,6 +4,7 @@ class EnrollmentsController < ApplicationController
 
   def index
     @enrollments = Enrollment.all
+    authorize  @enrollments
   end
 
   def show
@@ -14,6 +15,7 @@ class EnrollmentsController < ApplicationController
   end
 
   def edit
+    authorize  @enrollment
   end
 
   def create
@@ -21,12 +23,13 @@ class EnrollmentsController < ApplicationController
       flash[:alert] = "You cannot access paid cources yet."
       redirect_to new_course_enrollment_path(@course)
     else
-      @enrollemnt = current_user.buy_course(@course)
+      @enrollment = current_user.buy_course(@course)
       redirect_to course_path(@course),notice: "You are enrolled!"
     end
   end
 
   def update
+    authorize  @enrollment
     respond_to do |format|
       if @enrollment.update(enrollment_params)
         format.html { redirect_to enrollment_url(@enrollment), notice: "Enrollment was successfully updated." }
@@ -40,7 +43,7 @@ class EnrollmentsController < ApplicationController
 
   def destroy
     @enrollment.destroy
-
+    authorize  @enrollment
     respond_to do |format|
       format.html { redirect_to enrollments_url, notice: "Enrollment was successfully destroyed." }
       format.json { head :no_content }
