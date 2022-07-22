@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
-  resources :enrollments
+  resources :enrollments do 
+    get :my_students, on: :collection
+  end
   
   get 'users/index'
   get 'activity', to: 'pages#activity'
   devise_for :users
   resources :courses do 
+    get :purchased, :pending_review, :my_courses, on: :collection
     resources :enrollments, only: [:new, :create]
     resources :lessons
   end
