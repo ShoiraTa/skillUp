@@ -24,8 +24,10 @@
   -#       %span.input-group-append
   -#         %button.btn.btn-primary.btn-sm{:type => "submit"}
   -#           %span.fa.fa-search{"aria-hidden" => "true"}
+
 %h2.mb-4
-  Let's start learning 
+  -if current_user 
+    Let's start learning 
   = current_user
 .card-group
   .card.card-body
@@ -57,20 +59,39 @@
     .row
     Learn on your schedule
 
-%hr
-  %h2 Popular courses
+%br
+%h2 Continue Learning
+.row.row-cols-1.row-cols-md-3
+  -@purchased_courses.each do |course|
+    =render 'courses/course', course: course
+
+%br
+%h2 
+  .fa.fa-chart-line
+  Popular courses
 .row.row-cols-1.row-cols-md-3
   -@popular_courses.each do |course|
     =render 'courses/course', course: course
 
-    -# %hr
-    -#   %h2 Most recent courses
-    -# .row.row-cols-1.row-cols-md-3
-    -#   -@recent_courses.each do |course|
-    -#     =render 'courses/course', course: course
+%br
+%h2 
+  .fa.fa-clock
+  Most recent courses
+.row.row-cols-1.row-cols-md-3
+  -@recent_courses.each do |course|
+    =render 'courses/course', course: course
 
-    -# %hr
-    -#   %h2 Top rated courses
-    -# .row.row-cols-1.row-cols-md-3
-    -#   -@top_rated_courses.each do |course|
-    -#     =render 'courses/course', course: course
+%br
+%h2 
+  .fa.fa-star
+  Top rated courses
+.row.row-cols-1.row-cols-md-3
+  -@top_rated_courses.each do |course|
+    =render 'courses/course', course: course
+
+%br
+%h2 
+  What our students have to say 
+.card-columns
+  - @latest_good_reviews.each do |enrollment| 
+    = render 'enrollments/enrollment', enrollment: enrollment
