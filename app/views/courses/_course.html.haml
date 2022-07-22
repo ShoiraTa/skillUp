@@ -4,36 +4,42 @@
       = link_to course.title, course_path(course)
   .card-body
     = course.description
+  .card-footer.text-center
+    = enrollment_button(course)
+    = review_button(course)
+    = number_to_currency(course.price)  
+  .card-footer
+    .row 
+      .col-6
+        .text-warning.fa.fa-star
+        = course.avg_rating
+        (
+        .fa.fa-user-graduate
+        = course.enrollments_count
+        )
+      .col-6
+        .text-end
+          .fa-solid.fa-chalkboard-user
+          = link_to course.user.user_name, user_path(course.user)
+     
+
+
   .card-footer
     .fa.fa-list-check 
     Lessons:
     = course.lessons_count
+
   .card-footer
     .row
       .col-6
         .fa.fa-globe-africa
         = course.language
       .col-6
-        .text-right
+        .text-end
           .fa.fa-signal
           = course.level
-  .card-footer
-    = enrollment_button(course)
-    = review_button(course)
-    = number_to_currency(course.price)  
-  .card-footer
-    .text-warning.fa.fa-star
-    Rating:
-    = course.avg_rating
-    \/
-    Enrollments count: 
-    = course.enrollments_count
-  .card-footer
-    .far.fa-clock
-    = course.created_at.strftime('%d-%b-%Y')
-    %br
-    .fa-solid.fa-chalkboard-user
-    = course.user.user_name
+
+
   .card-footer 
     = link_to 'Show', course
     - if current_user
