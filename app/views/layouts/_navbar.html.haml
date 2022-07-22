@@ -6,27 +6,41 @@
     #navbarSupportedContent.collapse.navbar-collapse.justify-content-between
       - if current_user 
         %ul.navbar-nav.mr-auto
-          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(root_path)}"}
-            = link_to root_path, class: 'nav-link' do
-              .fa.fa-home
-              Home
           %li.nav-item{class: "#{'active font-weight-bold' if current_page?(courses_path)}"}
             = link_to courses_path, class: 'nav-link' do
               .fa.fa-graduation-cap
               Courses
-          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(users_path)}"}
-            = link_to users_path, class: 'nav-link' do
-              .fa.fa-users
-              Users
+          - if current_user && current_user.has_role?(:admin)
+            %li.nav-item.dropdown
+              %a#adminDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+                Admin
+              .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "adminDropdown"}
+                = link_to users_path, class: "dropdown-item" do
+                  .fa.fa-users
+                  All Users
+                = link_to enrollments_path, class: "dropdown-item" do
+                  .fa.fa-lock
+                  Enrollments
+                = link_to activity_path, class: "dropdown-item" do
+                  .fa.fa-bell
+                  Activity
+          - if current_user && current_user.has_role?(:teacher)
+            %li.nav-item.dropdown
+              %a#teacherropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+                Teach
+              .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "teacherropdown"}
+                = link_to new_course_path, class: "dropdown-item" do
+                  .fa.fa-plus
+                  New Course
+          - if current_user && current_user.has_role?(:student)
+            %li.nav-item.dropdown
+              %a#studentDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+                Learn
+              .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "studentDropdown"}
+                = link_to new_course_path, class: "dropdown-item" do
+                  .fa.fa-plus
+                  New Course
 
-          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_course_path)}"}
-            = link_to new_course_path, class: 'nav-link' do
-              .fa.fa-plus
-              New Course
-          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(enrollments_path)}"}
-            = link_to enrollments_path, class: 'nav-link' do
-              .fa.fa-lock
-              Enrollments
         .d-flex.align-items-center
           -#  Search with ransack
           = search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f|
@@ -42,21 +56,18 @@
           -#     %span.input-group-append
           -#       %button.btn.btn-primary.btn-sm{:type => "submit"}
           -#         %span.fa.fa-search{"aria-hidden" => "true"}
-          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(pages_activity_path)}"}
-            = link_to pages_activity_path, class: 'nav-link' do
-              .fa.fa-bell
-              Activity
+
+
           %li.nav-item.dropdown
-            %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+            %a#userDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
               %b= current_user.email
-            .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "navbarDropdown"}
+            .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "userDropdown"}
               = link_to edit_user_registration_path, class: "dropdown-item" do
                 .fa.fa-cog
                 %b Account settings
               = button_to destroy_user_session_path, method: :delete, class: "dropdown-item" do
                 .fa.fa-sign-out-alt
                 %b Sign out
-
 
       - else
         %ul.navbar-nav
