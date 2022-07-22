@@ -1,17 +1,19 @@
 - content_for :title do
   Skillup
   |
-  Editing 
+  Review 
   =  @enrollment
 
 %p
 .card 
   .card-header
-    %h1 Edit Enrollment
+    %h1 
+      .text-warning.fa.fa-star
+      Add a review
   .card-body
     = render 'form'
   .card-footer
-    = link_to 'Show', @enrollment
+    = link_to 'Show Review', @enrollment
     \|
-    = link_to 'Back', enrollments_path
+    = link_to 'Back To Course', course_path(@enrollment.course)
 

@@ -18,7 +18,6 @@ class LessonPolicy < ApplicationPolicy
   #   @record.course.user == @user
   # end
   def create?
-    @record.course
     @record.course.user == @user
   end
 

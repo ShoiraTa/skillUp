@@ -6,9 +6,9 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 PublicActivity.enabled = false
-# User.create!(email: 'admin@gmail.com', password: '123456', password_confirmation: '123456')
-# User.create!(email: 'student@gmail.com', password: '123456', password_confirmation: '123456')
-# User.create!(email: 'shoira.shakirovna@gmail.com', password: '123456', password_confirmation: '123456')
+User.create!(email: 'admin@gmail.com', password: '123456', password_confirmation: '123456')
+User.create!(email: 'student@gmail.com', password: '123456', password_confirmation: '123456')
+User.create!(email: 'shoira.shakirovna@gmail.com', password: '123456', password_confirmation: '123456')
 
 
 5.times do
@@ -35,15 +35,15 @@ Course.create!([{
   }]
 )
 end
-# 2.times do
-# Course.create!([{
-#   title: Faker::Educator.course_name,
-#   description: Faker::TvShows::GameOfThrones.quote,
-#   short_description: Faker::TvShows::GameOfThrones.quote,
-#   user_id: User.find(2),
-#   language: "English",
-#   level: "Advanced",
-#   price: 15
-#   }]
-# )
-# end
+2.times do
+Course.create!([{
+  title: Faker::Educator.course_name,
+  description: Faker::TvShows::GameOfThrones.quote,
+  short_description: Faker::TvShows::GameOfThrones.quote,
+  user_id: User.find(2).id,
+  language: "English",
+  level: "Advanced",
+  price: 15
+  }]
+)
+end

@@ -1,4 +1,5 @@
 class Enrollment < ApplicationRecord
+  scope :pending_review, -> {where(rating: [0, nil, ""], review: [0, nil, ""])}
   belongs_to :course
   belongs_to :user
  
