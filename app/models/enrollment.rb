@@ -1,7 +1,6 @@
 class Enrollment < ApplicationRecord
   extend FriendlyId
-  scope :pending_review, -> {where(rating: [0, nil, ""], review: [0, nil, ""])}
-  scope :reviewed, -> {where.not(review: [0, nil, ""])}
+
   belongs_to :course, counter_cache: true
     # Course.find_each{|course| Course.reset_counters(course.id, :enrollments)}
   belongs_to :user, counter_cache: true
@@ -13,6 +12,10 @@ class Enrollment < ApplicationRecord
   validates :user, :course, presence: true
   validate :cant_subscribe_to_own_course
   friendly_id :to_s, use: :slugged
+
+  scope :pending_review, -> {where(rating: [0, nil, ""], review: [0, nil, ""])}
+  scope :reviewed, -> {where.not(review: [0, nil, ""])}
+  scope :latest_good_reviews, -> {order(rating: :desc, created_at: :desc).limit(3)}
 
   after_save do 
     unless rating.nil? || rating.zero?

@@ -17,6 +17,10 @@ class Course < ApplicationRecord
 
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
+  scope :recent_courses, -> {limit(3).order(created_at: :desc)}
+  scope :top_rated_courses, -> {limit(3).order(avg_rating: :desc,  created_at: :desc)}
+  scope :popular_courses, -> {limit(3).order(enrollments_count: :desc,  created_at: :desc)}
+
   def to_s
     title
   end
