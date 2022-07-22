@@ -8,25 +8,36 @@
   Listing enrollments
   = @enrollments.count
 %br
+
+
+= search_form_for @q do |f|
+  = f.search_field :user_email_cont, placeholder: 'User email'
+  = f.search_field :course_title_cont, placeholder: 'Course title'
+  = f.search_field :price_eq, placeholder: 'Price'
+  = f.search_field :review_cont, placeholder: 'Review'
+  = f.search_field :rating_eq, placeholder: 'Rating'
+  = f.submit
+  = link_to 'refresh', enrollments_path
+%br
+
 .table-responsive
   %table.table.table-bordered.table-striped.table-sm
     %thead
       %tr
         %th 
           .fa.fa-graduation-cap
-          Course
-        %th 
+          =sort_link(@q, :course_title)
+        %th
           .fa.fa-user
-          User
+          =sort_link(@q, :user_email)
         %th 
-          .fa.fa-clock
-          Bought
+          =sort_link(@q, :created_at)
         %th 
           .fa.fa-dollar-sign
-          Price
+          =sort_link(@q, :price)
         %th 
           .fa.fa-star
-          Rating
+          =sort_link(@q, :rating)
         %th
           .fa.fa-comment 
           Review
