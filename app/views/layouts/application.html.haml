@@ -11,9 +11,7 @@
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
     %script{:crossorigin => "anonymous", :src => "https://kit.fontawesome.com/36c60608a5.js"}
-    -# = javascript_include_tag 'application', 'data-turbolinks-track': 'reload', :type => "module"
-    -# %script{"data-mutate-approach" => "sync", :src => "https://kit.fontawesome.com/36c60608a5.js"}
-    
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload', :type => "module"
     -# Google Font
     %link{:crossorigin => "", :href => "https://fonts.gstatic.com", :rel => "preconnect"}/
     %link{:href => "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap", :rel => "stylesheet"}/
