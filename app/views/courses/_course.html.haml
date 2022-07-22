@@ -6,7 +6,8 @@
     = course.description
   .card-footer
     .fa.fa-list-check 
-    = course.lessons.count
+    Lessons:
+    = course.lessons_count
   .card-footer
     .row
       .col-6
@@ -22,7 +23,11 @@
     = number_to_currency(course.price)  
   .card-footer
     .text-warning.fa.fa-star
+    Rating:
     = course.avg_rating
+    \/
+    Enrollments count: 
+    = course.enrollments_count
   .card-footer
     .far.fa-clock
     = course.created_at.strftime('%d-%b-%Y')

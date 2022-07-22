@@ -8,20 +8,28 @@
     = link_to user.email, user_path(user)
 
   .card-footer
-    Signed up
+    %b Signed up
     = time_ago_in_words(user.created_at)
     ago
   .card-footer
+    %b Roles: 
     - user.roles.each do |role|
-      = role.name
+      = role.name.capitalize 
+      |
     - if policy(user).edit? 
-      = link_to 'Edit roles', edit_user_path(user), class: 'btn'
+      = link_to 'Edit roles', edit_user_path(user), class: 'btn btn-warning btn-sm'
+    .row
+    %b Courses created: 
+    = user.courses_count
+    .row
+    %b  Enrollments
+    = user.enrollments_count
   .card-footer
     = 'sign_in_count'.humanize
     .row
     -# = 'current_sign_in_at'.humanize
     -# = user.current_sign_in_at
-    -# .row
-    = 'last_sign_in_at'.humanize
-    = user.last_sign_in_at
     .row
+    = 'last_sign_in_at'.humanize
+    = user.last_sign_in_at.strftime("%d-%b-%y")
+

@@ -1,9 +1,10 @@
 class Enrollment < ApplicationRecord
   extend FriendlyId
   scope :pending_review, -> {where(rating: [0, nil, ""], review: [0, nil, ""])}
-  belongs_to :course
-  belongs_to :user
- 
+  belongs_to :course, counter_cache: true
+    # Course.find_each{|course| Course.reset_counters(course.id, :enrollments)}
+  belongs_to :user, counter_cache: true
+   # User.find_each{|course| Course.reset_counters(course.id, :enrollments)}
   validates_uniqueness_of :user_id, scope: :course_id
   validates_uniqueness_of :course_id, scope: :user_id
   validates_presence_of :review, if: :rating?
@@ -17,7 +18,7 @@ class Enrollment < ApplicationRecord
       course.update_rating
     end
   end
-  
+
   after_destroy do
     course.update_rating
   end 
@@ -37,3 +38,10 @@ class Enrollment < ApplicationRecord
   end
 
 end
+
+# For reference
+
+
+
+
+

@@ -1,5 +1,7 @@
 class Lesson < ApplicationRecord
-  belongs_to :course
+  belongs_to :course, counter_cache: true
+  # Course.find_each{|user| Course.reset_counters(user.id, :lessons)}
+
   validates :title, :content, :course, presence: true
   has_rich_text :content
   extend FriendlyId
