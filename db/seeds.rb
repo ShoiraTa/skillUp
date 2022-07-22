@@ -5,10 +5,13 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-
-# User.create!(email: 'admin2@example.com', password: '1234567', password_confirmation: '1234567')
 PublicActivity.enabled = false
-10.times do
+# User.create!(email: 'admin@gmail.com', password: '123456', password_confirmation: '123456')
+# User.create!(email: 'student@gmail.com', password: '123456', password_confirmation: '123456')
+# User.create!(email: 'shoira.shakirovna@gmail.com', password: '123456', password_confirmation: '123456')
+
+
+5.times do
 Course.create!([{
   title: Faker::Educator.course_name,
   description: Faker::TvShows::GameOfThrones.quote,
@@ -20,3 +23,27 @@ Course.create!([{
   }]
 )
 end
+5.times do
+Course.create!([{
+  title: Faker::Educator.course_name,
+  description: Faker::TvShows::GameOfThrones.quote,
+  short_description: Faker::TvShows::GameOfThrones.quote,
+  user_id: User.first.id,
+  language: "English",
+  level: "Advanced",
+  price: 0
+  }]
+)
+end
+# 2.times do
+# Course.create!([{
+#   title: Faker::Educator.course_name,
+#   description: Faker::TvShows::GameOfThrones.quote,
+#   short_description: Faker::TvShows::GameOfThrones.quote,
+#   user_id: User.find(2),
+#   language: "English",
+#   level: "Advanced",
+#   price: 15
+#   }]
+# )
+# end
