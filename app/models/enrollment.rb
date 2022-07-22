@@ -11,6 +11,17 @@ class Enrollment < ApplicationRecord
   validates :user, :course, presence: true
   validate :cant_subscribe_to_own_course
   friendly_id :to_s, use: :slugged
+
+  after_save do 
+    unless rating.nil? || rating.zero?
+      course.update_rating
+    end
+  end
+  
+  after_destroy do
+    course.update_rating
+  end 
+
   def to_s
     course.to_s
   end
@@ -24,4 +35,5 @@ class Enrollment < ApplicationRecord
       end
     end
   end
+
 end

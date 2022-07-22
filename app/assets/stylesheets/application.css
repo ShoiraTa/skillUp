@@ -86,3 +86,7 @@
  .pagination{
   justify-content: center;
  }
+
+ .enrollment_rating  .form-check-input {
+  position: absolute;
+ }
