@@ -52,4 +52,6 @@
           %td
             - if policy(user).edit? 
               = link_to 'Edit roles', edit_user_path(user), class: 'btn'
-
+  .row.mt-3
+    != pagy_bootstrap_nav(@pagy)
+    != pagy_bootstrap_nav_js(@pagy)

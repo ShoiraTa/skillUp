@@ -5,6 +5,8 @@ class EnrollmentsController < ApplicationController
   def index
     @enrollments = Enrollment.all
     authorize  @enrollments
+
+    @pagy, @enrollments = pagy(Enrollment.all)
   end
 
   def show
@@ -52,7 +54,7 @@ class EnrollmentsController < ApplicationController
 
   private
     def set_enrollment
-      @enrollment = Enrollment.find(params[:id])
+      @enrollment = Enrollment.friendly.find(params[:id])
     end
 
     def set_course
