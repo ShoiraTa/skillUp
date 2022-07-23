@@ -7,6 +7,7 @@ class Course < ApplicationRecord
 
   has_many :lessons, dependent: :destroy
   has_many :enrollments, dependent: :destroy
+  has_many :user_lessons, through: :lessons
 
   validates :title, :short_description, :language, :price, :level, presence: :true
   validates :description, presence: :true
@@ -37,6 +38,12 @@ class Course < ApplicationRecord
 
   def bought_course(user)
     self.enrollments.where(user_id: [user.id], course_id:[self.id]).empty?
+  end
+
+  def current_user_progress(user)
+    unless self.lessons_count == 0
+      user_lessons.where(user: user).count / self.lessons_count.to_f * 100
+    end
   end
   
   def update_rating
