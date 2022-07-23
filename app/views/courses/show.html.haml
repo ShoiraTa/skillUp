@@ -2,12 +2,10 @@
   Skillup 
   |
   = @course.title
-
 = link_to 'Courses', courses_path
 \/
 = link_to @course.title, course_path(@course)
 %p
-
 
 .row 
   .col-lg-8.order-1.order-lg-1
@@ -27,17 +25,14 @@
       .p-3
       = @course.description
     %h4
-      Lessons: 
-      = @course.lessons_count
-
+      = pluralize(@course.lessons_count, 'Lesson')
       .text-end
         = number_to_percentage(@course.current_user_progress(current_user),precision: 0)
     -@lessons.each do |lesson|
       = render 'lessons/lesson_preview', lesson: lesson
     %p
     %h4
-      Reviews: 
-      = @reviews
+      = pluralize(@reviews, 'Review')
     - @enrollments_with_reviews.each do |enrollment| 
       = render 'enrollments/enrollment', enrollment: enrollment
 
