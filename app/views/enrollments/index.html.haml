@@ -27,21 +27,23 @@
       %tr
         %th 
           .fa.fa-graduation-cap
-          =sort_link(@q, :course_title)
+          =sort_link(@q, :course_title, 'Course')
         %th
           .fa.fa-user
-          =sort_link(@q, :user_email)
+          =sort_link(@q, :user_email, 'User')
         %th 
           =sort_link(@q, :created_at)
         %th 
           .fa.fa-dollar-sign
           =sort_link(@q, :price)
+        %th
+          User Progress
+        %th 
+          .fa.fa-comment 
+          Review
         %th 
           .fa.fa-star
           =sort_link(@q, :rating)
-        %th
-          .fa.fa-comment 
-          Review
         %th
         %th
         %th
@@ -49,15 +51,17 @@
     %tbody
       - @enrollments.each do |enrollment|
         %tr
-          %td= enrollment.course
+          %td= link_to enrollment.course, course_path(enrollment.course)
           %td
             = link_to enrollment.user, user_path(enrollment.user) 
           %td= enrollment.created_at.strftime("%d/%b/%y, %H:%M")
           %td= number_to_currency(enrollment.price)
+          %td= number_to_percentage(enrollment.course.current_user_progress(enrollment.user), precision: 0)
+          %td= enrollment.review 
           %td= enrollment.rating
-          %td= enrollment.review
           %td= link_to 'See Review', enrollment
-          %td= link_to 'Edit Review', edit_enrollment_path(enrollment)
+          - if policy(enrollment).edit?
+            %td= link_to 'Edit Review', edit_enrollment_path(enrollment)
           - if policy(enrollment).destroy?
             %td= button_to 'Delete enrollment', enrollment, method: :delete, data: { confirm: 'Are you sure?' }
 

@@ -16,6 +16,8 @@ class CoursesController < ApplicationController
 
   def show
     @lessons = @course.lessons
+    @enrollments_with_reviews = @course.enrollments.reviewed
+    @reviews =  @course.enrollments.reviewed.count
   end
 
   def new

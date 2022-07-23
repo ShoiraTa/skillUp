@@ -1,9 +1,9 @@
 .card
   .card-header
     - if lesson.viewed(current_user) == true
-      .text-success.fa.fa-check-square
+      .text-success.far.fa-check-square
     - else
-      .text-muted.fa.fa-check-square
+      .text-muted.far.fa-check-square
 
     = link_to lesson.title, course_lesson_path(lesson.course,  lesson)
   - if policy(lesson).show?

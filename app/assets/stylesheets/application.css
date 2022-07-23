@@ -90,3 +90,11 @@
  .enrollment_rating  .form-check-input {
   position: absolute;
  }
+
+ .jumbotron-b{
+  padding: 1.2rem;
+  background-color: rgba(99, 99, 99, 0.2);
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  box-shadow: rgba(157, 155, 155, 0.2) 0px 2px 8px 0px;
+ }

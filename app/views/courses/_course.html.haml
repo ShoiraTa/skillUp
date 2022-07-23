@@ -41,9 +41,9 @@
 
 
   .card-footer 
-    = link_to 'Show', course
     - if current_user
       - if policy(course).edit?
+        = link_to 'Add lesson', new_course_lesson_path(course, @lesson)
         \|
         = link_to 'Edit', edit_course_path(course) 
         \| 
