@@ -63,7 +63,10 @@
   .row.row-cols-1.row-cols-md-3
     -@purchased_courses.each do |course|
       =render 'courses/course', course: course
-
+  %br
+  .text-end 
+    = link_to 'All my purchased courses', purchased_courses_path()
+  %br
 %br
 %h2 
   .fa.fa-chart-line
@@ -71,14 +74,20 @@
 .row.row-cols-1.row-cols-md-3
   -@popular_courses.each do |course|
     =render 'courses/course', course: course
-
 %br
+.text-end 
+  = link_to 'More popular courses', courses_path(courses_search:{s: 'enrollments_count :desc'})
+%br
+
 %h2 
   .fa.fa-clock
   Most recent courses
 .row.row-cols-1.row-cols-md-3
   -@recent_courses.each do |course|
     =render 'courses/course', course: course
+%br
+.text-end 
+  = link_to 'More new courses', courses_path(courses_search:{s: 'created_at :desc'})
 
 %br
 %h2 
@@ -87,6 +96,9 @@
 .row.row-cols-1.row-cols-md-3
   -@top_rated_courses.each do |course|
     =render 'courses/course', course: course
+%br
+.text-end 
+  = link_to 'More top rated courses', courses_path(courses_search:{s: 'rating :desc'})
 
 %br
 %h2 
