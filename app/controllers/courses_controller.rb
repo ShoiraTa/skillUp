@@ -16,6 +16,7 @@ class CoursesController < ApplicationController
 
   def show
     @lessons = @course.lessons
+    authorize @course
     @enrollments_with_reviews = @course.enrollments.reviewed
     @reviews =  @course.enrollments.reviewed.count
   end
@@ -106,7 +107,7 @@ class CoursesController < ApplicationController
   end
   def unapproved
     @ransack_path= unapproved_courses_path
-    @ransack_courses =  Course.unapproved.ransack(params[:courses_search], search_key: :courses_search)
+    @ransack_courses =  Course.published.unapproved.ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
     render 'index'
   end
