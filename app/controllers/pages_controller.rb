@@ -18,6 +18,20 @@ class PagesController < ApplicationController
   end
 
   def activity
-    @activities = PublicActivity::Activity.all
+    if current_user.has_role?(:admin)
+      @activities = PublicActivity::Activity.all
+    else
+      redirect_to root_path, alert: "You are not authorised"
+    end
+  end
+
+  def statistics
+    if current_user.has_role?(:admin)
+      @enrollments = Enrollment.all
+      @users = User.all
+      @courses = Course.all
+    else
+      redirect_to root_path, alert: "You are not authorised"
+    end
   end
 end

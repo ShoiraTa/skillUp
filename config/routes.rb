@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   
   get 'users/index'
   get 'activity', to: 'pages#activity'
+  get 'statistics', to: 'pages#statistics'
   devise_for :users
   resources :courses do 
     get :purchased, :pending_review, :my_courses, on: :collection

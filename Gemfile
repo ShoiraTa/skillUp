@@ -26,6 +26,8 @@ gem "rolify"
 gem "pundit", "~> 2.2"
 gem 'exception_notification'
 gem 'pagy', '~> 5.10'
+gem "chartkick"
+gem "groupdate"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
