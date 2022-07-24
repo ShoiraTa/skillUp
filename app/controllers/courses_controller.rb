@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :set_course, only: %i[ show edit update destroy approve unapprove ]
   def index
     #if params[:title]
     #  @courses = Course.where('title ILIKE ?', "%#{params[:title]}%") #case-insensitive
@@ -10,7 +10,7 @@ class CoursesController < ApplicationController
     #  #@courses = @q.result.includes(:user)
     #end
       @ransack_path= courses_path
-      @ransack_courses = Course.ransack(params[:courses_search], search_key: :courses_search)
+      @ransack_courses = Course.published.approved.ransack(params[:courses_search], search_key: :courses_search)
       @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
   end
 
@@ -93,6 +93,24 @@ class CoursesController < ApplicationController
   
   end
 
+  def approve
+    authorize @course, :approve?
+    @course.update_attribute(:approved, true)
+    redirect_to @course, notice: "Course was approved." 
+  end
+
+  def unapprove
+    authorize @course, :approve?
+    @course.update_attribute(:approved, false)
+    redirect_to @course, alert: "Course was not approved, and is hidden." 
+  end
+  def unapproved
+    @ransack_path= unapproved_courses_path
+    @ransack_courses =  Course.unapproved.ransack(params[:courses_search], search_key: :courses_search)
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
+    render 'index'
+  end
+
   private
 
     def set_course
@@ -100,6 +118,6 @@ class CoursesController < ApplicationController
     end
 
     def course_params
-      params.require(:course).permit(:title, :description, :price, :language, :short_description, :level )
+      params.require(:course).permit(:title, :description, :price, :language, :short_description, :level, :published )
     end
 end

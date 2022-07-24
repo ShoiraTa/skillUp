@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   get 'statistics', to: 'pages#statistics'
   devise_for :users
   resources :courses do 
-    get :purchased, :pending_review, :my_courses, on: :collection
+    member do 
+      patch :approve
+      patch :unapprove
+    end
+    get :purchased, :pending_review, :my_courses, :unapproved, on: :collection
     resources :enrollments, only: [:new, :create]
     resources :lessons
   end

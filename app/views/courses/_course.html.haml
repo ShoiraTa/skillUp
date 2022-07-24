@@ -39,12 +39,27 @@
           .fa.fa-signal
           = course.level
 
-
-  .card-footer 
-    - if current_user
-      - if policy(course).edit?
+  - if current_user
+    - if policy(course).edit?
+      .card-footer 
         = link_to 'Add lesson', new_course_lesson_path(course, @lesson)
         \|
         = link_to 'Edit', edit_course_path(course) 
         \| 
         = button_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }
+    - if policy(course).destroy?
+      .card-footer 
+        - if course.published?
+          .text-success Published
+        - else
+          .text-danger Not published
+        - if course.approved?
+          .text-success Approved
+        - else
+          .text-danger Not approved
+    - if policy(course).approve?
+      .card-footer
+        - if course.approved?     
+          = button_to 'Unapprove', unapprove_course_path(course), method: :patch, class: 'link'
+        - else 
+          = button_to 'Approve', approve_course_path(course), method: :patch, class: 'link'
