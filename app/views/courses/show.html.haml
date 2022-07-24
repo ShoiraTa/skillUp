@@ -29,7 +29,8 @@
       .text-end
         = number_to_percentage(@course.current_user_progress(current_user),precision: 0)
     -@lessons.each do |lesson|
-      = render 'lessons/lesson_preview', lesson: lesson
+      %li.list-group-item
+        = render 'lessons/lesson_preview', lesson: lesson
     %p
     %h4
       = pluralize(@reviews, 'Review')
