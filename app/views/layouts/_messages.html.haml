@@ -1,7 +1,8 @@
 
 - flash.each do |name, msg| 
-
+  = puts '1.//////////////////////////////////////' 
   - if msg.is_a?(String)
+    = puts '2//////////////////////////////////////' 
     %div.alert.alert-dismissible.fade.show{"class" => "alert alert-#{name.to_s === 'notice'? 'success' : 'warning'}", :role => 'alert'}
       = content_tag :div, msg, :id => "flash_#{name}"
       %button.btn-close{  :type => "button", "aria-label" => "Close", "data-bs-dismiss" => "alert"}
