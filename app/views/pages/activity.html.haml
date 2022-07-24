@@ -15,7 +15,8 @@
     %li.list-group-item
       = activity.created_at.strftime("%d/%B/%y")
       (#{time_ago_in_words(activity.created_at)})
-      = activity.trackable_type
+      = activity.trackable_type()
+      =model_label( activity.trackable_type)
       - if activity.trackable_type == "Lesson" 
         - if Lesson.where(id: activity.trackable_id).present?
           = link_to activity.trackable, course_lesson_path(activity.trackable.course, activity.trackable) 
@@ -24,6 +25,7 @@
       - else
         = link_to activity.trackable, activity.trackable
       = activity.key
+      = action_label(activity.key.match(/\.(.*)/)[1])
       by:
       = link_to activity.owner, user_path(activity.owner)
       - if activity.parameters.any?
