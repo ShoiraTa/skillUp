@@ -10,10 +10,10 @@ class PagesController < ApplicationController
     # @purchased_courses = Course.joins(:enrollments).where(enrollments: {user: current_user}).order(created_at: :desc).limit(3)
 
     # with scopes
-    @recent_courses = Course.recent_courses
+    @recent_courses = Course.recent_courses.published.approved
     @latest_good_reviews = Enrollment.reviewed.latest_good_reviews
-    @top_rated_courses = Course.top_rated_courses
-    @popular_courses = Course.popular_courses
+    @top_rated_courses = Course.top_rated_courses.published.approved
+    @popular_courses = Course.popular_courses.published.approved
     @purchased_courses = Course.joins(:enrollments).where(enrollments: {user: current_user}).order(created_at: :desc).limit(3)
   end
 

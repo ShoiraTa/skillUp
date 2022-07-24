@@ -57,12 +57,12 @@
     Lifetime access
     .row
     Learn on your schedule
-
-%br
-%h2 Continue Learning
-.row.row-cols-1.row-cols-md-3
-  -@purchased_courses.each do |course|
-    =render 'courses/course', course: course
+- if current_user
+  %br
+  %h2 Continue Learning
+  .row.row-cols-1.row-cols-md-3
+    -@purchased_courses.each do |course|
+      =render 'courses/course', course: course
 
 %br
 %h2 

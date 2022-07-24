@@ -8,7 +8,7 @@ class CoursePolicy < ApplicationPolicy
       @record.user == @user
     end
     def show? 
-      @record.published && @record.approved || @user.present? && @user.has_role?(:admin) || @user.present? && @record.user == user || @record.bought_course(@user)
+      @record.published && @record.approved || @user.present? && @user.has_role?(:admin) || @user.present? && @record.user == user || @user.present? && @record.bought_course(@user)
     end
     def update? 
       @record.user == @user

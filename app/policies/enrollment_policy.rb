@@ -9,7 +9,7 @@ class EnrollmentPolicy < ApplicationPolicy
     @user.has_role?(:admin)
   end
   def edit? 
-     @record.user == @user
+    @user.present? && @record.user == @user
   end
 
   def update? 

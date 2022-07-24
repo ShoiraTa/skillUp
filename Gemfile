@@ -28,6 +28,8 @@ gem 'exception_notification'
 gem 'pagy', '~> 5.10'
 gem "chartkick"
 gem "groupdate"
+gem 'rails-erd', group: :development
+gem 'ruby-graphviz'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
