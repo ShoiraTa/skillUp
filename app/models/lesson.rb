@@ -8,9 +8,13 @@ class Lesson < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
 
-    # Public Activity
-    include PublicActivity::Model
-    tracked owner: Proc.new{ |controller, model| controller.current_user }
+  # Public Activity
+  include PublicActivity::Model
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
+
+  # Ranking lessons for drag and drop
+  include RankedModel
+  ranks :row_order, :with_same => :course_id
 
   def to_s
     title

@@ -30,6 +30,7 @@ gem "chartkick"
 gem "groupdate"
 gem 'rails-erd', group: :development
 gem 'ruby-graphviz'
+gem 'ranked-model'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

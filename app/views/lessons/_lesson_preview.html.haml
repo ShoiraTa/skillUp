@@ -1,6 +1,20 @@
 
-- if lesson.viewed(current_user) == true
-  .text-success.far.fa-check-square
-- else
-  .text-muted.far.fa-check-square
-= link_to lesson.title, course_lesson_path(@course,lesson)
+.row 
+  .col-6
+    - if current_user
+      - if lesson.viewed(current_user) == true
+        .text-success.far.fa-check-square
+      - else
+        .text-muted.far.fa-check-square
+      = link_to course_lesson_path(@course,lesson) do 
+        = lesson.row_order_rank + 1 
+        = lesson.title
+    - else
+      .text-muted.far.fa-check-square
+      = link_to lesson.title, course_lesson_path(@course,lesson)
+
+  .col-6
+    .text-end
+      - if policy(lesson).edit?
+        = link_to 'Edit', edit_course_lesson_path(@course, lesson), class: 'btn btn-sm btn-warning'
+        = button_to 'Destroy', [@course, lesson], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger d-inline'

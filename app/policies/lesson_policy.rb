@@ -6,7 +6,7 @@ class LessonPolicy < ApplicationPolicy
   end
 
   def edit? 
-    @record.course.user == @user 
+    @record.course.user == @user
   end
   def show? 
     @record.course.user == @user || @user.has_role?(:admin) || @record.course.bought_course(@user) == false
