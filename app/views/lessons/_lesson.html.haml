@@ -20,8 +20,15 @@
         .col-6
           = button_to 'Destroy',  [lesson.course, lesson], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
     .card-footer
-      - unless  lesson.prev_lesson.nil? 
-        = link_to "Previous lesson", course_lesson_path(@course, lesson.prev_lesson)
-      - unless  lesson.next_lesson.nil? 
-        = link_to "Next lesson",  course_lesson_path(@course, lesson.next_lesson)
+      - unless lesson.prev_lesson.nil?
+        .text-start
+          = link_to course_lesson_path(@course, lesson.prev_lesson), class: 'btn btn-sm btn-info' do
+            .fa.fa-arrow-left
+            Previous
+      - unless lesson.next_lesson.nil?
+        .text-end
+          = link_to course_lesson_path(@course, lesson.next_lesson), class: 'btn btn-sm btn-info' do
+            Next
+            .fa.fa-arrow-right
+
 %p  
