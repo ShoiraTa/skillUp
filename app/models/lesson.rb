@@ -15,7 +15,12 @@ class Lesson < ApplicationRecord
   # Ranking lessons for drag and drop
   include RankedModel
   ranks :row_order, :with_same => :course_id
-
+  def prev_lesson
+    course.lessons.where("row_order < ?", row_order).order(:row_order).last
+  end
+  def next_lesson
+    course.lessons.where("row_order > ?", row_order).order(:row_order).first
+  end
   def to_s
     title
   end

@@ -10,7 +10,7 @@ class LessonsController < ApplicationController
   def show
     authorize @lesson
     current_user.view_lesson(@lesson)
-    @lessons = @course.lessons
+    @lessons = @course.lessons.rank(:row_order)
   end
 
   # GET /lessons/new
@@ -57,7 +57,6 @@ class LessonsController < ApplicationController
     end
   end
 
-  # DELETE /lessons/1 or /lessons/1.json
   def destroy
     @lesson.destroy
     authorize @lesson
