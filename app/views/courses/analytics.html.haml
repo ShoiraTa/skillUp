@@ -1,0 +1,28 @@
+- content_for :title do
+  Skillup 
+  |
+  = @course.title
+  Analytics
+= link_to 'Courses', courses_path
+\/
+= link_to @course.title, course_path(@course)
+\/
+= link_to analytics_course_path(@course) do
+  .fa.fa-chart-bar
+  Analytics
+%p
+
+%h4.text-center
+  Analytics for #{@course.title}
+
+%h6 Enrollments per day, qty:
+=line_chart @course.enrollments.group_by_day(:created_at).count
+
+%h6 Enrollments per day, revenue:
+=line_chart @course.enrollments.group_by_day(:created_at).sum(:price)
+
+%h6 Unique user views:
+=bar_chart @course.user_lessons.joins(:lesson).group(:'lessons.title').count
+
+%h6 Empressions per lesson:
+=bar_chart @course.user_lessons.joins(:lesson).group(:'lessons.title').sum(:impressions)

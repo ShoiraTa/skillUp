@@ -25,6 +25,7 @@ class PagesController < ApplicationController
     end
   end
 
+
   def statistics
     if current_user.has_role?(:admin)
       @enrollments = Enrollment.all

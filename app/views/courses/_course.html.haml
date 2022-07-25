@@ -47,6 +47,8 @@
         = link_to 'Edit', edit_course_path(course) 
         \| 
         = button_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }
+        \| 
+        = link_to 'Analytics',analytics_course_path(course)
     - if policy(course).destroy?
       .card-footer 
         - if course.published?

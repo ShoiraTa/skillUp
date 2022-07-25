@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     member do 
       patch :approve
       patch :unapprove
+      get :analytics
     end
     get :purchased, :pending_review, :my_courses, :unapproved, on: :collection
     resources :enrollments, only: [:new, :create]

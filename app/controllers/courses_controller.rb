@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   skip_before_action :authenticate_user!, :only=> [:show]
-  before_action :set_course, only: %i[ show edit update destroy approve unapprove ]
+  before_action :set_course, only: %i[ show edit update destroy approve unapprove analytics ]
   def index
     #if params[:title]
     #  @courses = Course.where('title ILIKE ?', "%#{params[:title]}%") #case-insensitive
@@ -29,6 +29,10 @@ class CoursesController < ApplicationController
 
   def edit
     authorize @course
+  end
+
+  def analytics
+    authorize @course, :owner?
   end
 
   def purchased
